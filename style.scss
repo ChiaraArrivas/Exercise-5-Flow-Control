@@ -1,0 +1,117 @@
+$color-primary: red;
+$color-secondary: blue;
+$color-tertiary: green;
+
+@use "function.scss" as f;
+@use "sass:color";
+
+%text {
+    color: $color-tertiary;
+    border-bottom: f.rem(2) solid $color-secondary;
+}
+
+@mixin theme($color, $border-color, $font-size) {
+    color: $color;
+    border: f.rem(1) solid $border-color;
+    font-size: $font-size;
+}
+
+$sizes: f.rem(16), f.rem(32), f.rem(48);
+
+
+div {
+    display: flex;
+    flex-direction: column;
+    border: f.rem(1) solid $color-primary;
+    align-items: center;
+
+    h1 {
+        @extend %text;
+    }
+
+    h2 {
+        @extend %text;
+        padding: f.rem(18);
+        border: f.rem(1) solid $color-primary;
+    }
+
+
+
+    section {
+        display: flex;
+        padding: 0 f.rem(32) f.rem(24) f.rem(32);
+
+        article {
+            @include theme($color-tertiary, $color-tertiary, f.rem(15));
+
+            &:first-child {
+                color: $color-secondary;
+            }
+
+            &:nth-child(2) {
+                color: $color-primary;
+            }
+
+            &:nth-child(3) {
+                color: $color-secondary;
+            }
+
+            &:nth-child(4) {
+                color: $color-primary;
+            }
+
+            p {
+                padding: f.rem(16);
+                text-align: center;
+            }
+
+        }
+
+        &:last-child article {
+            @include theme ($color-tertiary, $color-secondary, f.rem(24));
+
+            p {
+                margin: f.rem(16) f.rem(120) f.rem(16) f.rem(120);
+            }
+        }
+
+        &:nth-last-of-type(2) {
+            gap: f.rem(31);
+            display: flex;
+
+            div {
+                width: f.rem(45);
+                height: f.rem(45);
+                align-items: flex-start;
+                background-color: white;
+                color: black;
+
+
+                @for $var from 1 to 20 {
+                    &:nth-child(#{$var}) {
+                        @if $var ==10 {
+                            color: $color-primary;
+                            background-color: $color-secondary;
+                            font-size: f.rem(48);
+                        }
+
+                        @else {
+                            background-color: color.adjust(white, $lightness: - ($var * 5%));
+                            color: color.adjust(black, $lightness: + ($var * 5%));
+                        
+                    }
+                }
+
+                @each $val in $sizes {
+                    &.fs-#{$val} {
+                        font-size: $val;
+                    }
+                }
+                
+            }
+
+        }
+    }
+
+}
+}
