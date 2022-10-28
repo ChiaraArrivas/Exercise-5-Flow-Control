@@ -49,6 +49,7 @@ div section:last-child article p {
 div section:nth-last-of-type(2) {
   gap: 1.9375rem;
   display: flex;
+  flex-wrap: wrap;
 }
 div section:nth-last-of-type(2) div {
   width: 2.8125rem;

@@ -78,7 +78,8 @@ div {
         &:nth-last-of-type(2) {
             gap: f.rem(31);
             display: flex;
-
+            flex-wrap: wrap;
+//Ho aggiunto un flex-wrap........
             div {
                 width: f.rem(45);
                 height: f.rem(45);
